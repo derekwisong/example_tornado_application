@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Then Custom Scripts -->
+<p id="clock">{{! message }}</p>
+
+{% end %}
+
+
+{% block scripts %}
+
+<script>
+    var ws = new WebSocket("ws://{{ host }}:{{ port }}/websocket");
+    ws.onopen = function() {
+        ws.send("Hello, websocket");
+    };
+
+    var clock = new Vue({
+    el: '#clock',
+    data: {
+        message: ''
+    }
+    })
+    ws.onmessage = function (evt) {
+        clock.message = evt.data;
+    };
+</script>
+
+{% end %}

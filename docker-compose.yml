@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+    app:
+        image: derekwisong/app:latest
+        build: .
+        ports:
+            - "8080:8080"
+    nginx:
+        build: ./services/nginx
+        ports:
+            - "80:80"
+        depends_on:
+            - app
+        volumes:
+            - ./app/ui/web/static:/var/www/html/static
