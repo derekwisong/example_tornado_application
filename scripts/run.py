@@ -1,8 +1,4 @@
-
-import app
-
-def main():
-    app.hello()
+import app.server
 
 if __name__ == '__main__':
-    main()
+    app.server.main()
